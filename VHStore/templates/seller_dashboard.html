@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block title %}Seller Dashboard{% endblock %}
+
+{% block content %}
+<style>
+    .dashboard {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 20px;
+    }
+
+    .column {
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+    }
+</style>
+
+<h2>Seller Dashboard</h2>
+
+<div class="dashboard">
+    <div class="column">
+        <h3>Equipment</h3>
+        <ul>
+            {% for equipment in equipments %}
+                <img src="{{ equipment.image.url }}" alt="{{ equipment.name }}" width="100" height="100">
+                <li>{{ equipment.name }} - ${{ equipment.price }}</li>
+            {% endfor %}
+        </ul>
+        <div class="button-container">
+            <button id="showEquipmentForm">Add Equipment</button>
+        </div>
+        <form id="equipmentForm" method="post" enctype="multipart/form-data" style="display: none;">
+            {% csrf_token %}
+            {{ equipment_form.as_p }}
+            <div class="button-container">
+                <button type="submit">Add</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="column">
+        <h3>Movies</h3>
+        <ul>
+            {% for movie in movies %}
+                <img src="{{ movie.image.url }}" alt="{{ movie.title }}" width="100" height="100">
+                <li>{{ movie.title }} - {{ movie.release_year }}</li>
+            {% endfor %}
+        </ul>
+        <div class="button-container">
+            <button id="showMovieForm">Add Movie</button>
+        </div>
+        <form id="movieForm" method="post" enctype="multipart/form-data" style="display: none;">
+            {% csrf_token %}
+            {{ movie_form.as_p }}
+            <div class="button-container">
+                <button type="submit">Add</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="column">
+        <h3>Cassettes</h3>
+        <ul>
+            {% for cassette in cassettes %}
+                <li>{{ cassette.movie.title }} - ${{ cassette.price }} - {{ cassette.condition }}</li>
+            {% endfor %}
+        </ul>
+        <div class="button-container">
+            <button id="showCassetteForm">Add Cassette</button>
+        </div>
+        <form id="cassetteForm" method="post" enctype="multipart/form-data" style="display: none;">
+            {% csrf_token %}
+            {{ cassette_form.as_p }}
+            <div class="button-container">
+                <button type="submit">Add</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    function toggleForm(formId, showButtonId) {
+        const form = document.getElementById(formId);
+        const showButton = document.getElementById(showButtonId);
+
+        showButton.addEventListener('click', function () {
+            form.classList.add('form-animation-enter');
+            form.style.display = 'block';
+        });
+
+        document.addEventListener('click', function (event) {
+            if (!form.contains(event.target) && event.target !== showButton) {
+                form.classList.add('form-animation-leave');
+                setTimeout(() => {
+                    form.style.display = 'none';
+                    form.classList.remove('form-animation-leave');
+                }, 300);
+            }
+        });
+    }
+
+    toggleForm('equipmentForm', 'showEquipmentForm');
+    toggleForm('movieForm', 'showMovieForm');
+    toggleForm('cassetteForm', 'showCassetteForm');
+});
+</script>
+{% endblock %}

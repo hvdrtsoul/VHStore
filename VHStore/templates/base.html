@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}VHStore{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0f0f0f;
+            color: #fff;
+        }
+
+        main {
+            width: 80%;
+            margin: 0 auto;
+            padding-top: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #f1c40f;
+            font-size: 64px
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 32px;
+        }
+
+        .content {
+            margin-top: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #f1c40f;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #e67e22;
+        }
+
+        footer {
+            padding: 20px 0;
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            color: #fff;
+        }
+
+        .centered {
+            text-align: center;
+            margin-top: 100px; /* Перемещение контента вниз, если нужно */
+        }
+
+        .centered p {
+            margin-bottom: 10px;
+        }
+
+        form {
+            width: 50%;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+
+        form h2 {
+            color: #555;
+        }
+
+        form button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #2980b9;
+        }
+
+        form ul {
+            text-align: left;
+            list-style: none;
+            padding: 0;
+        }
+
+        form button:hover {
+            background-color: #2980b9;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .form-animation-enter {
+            opacity: 0;
+            animation: fade-in 0.3s ease-in-out forwards;
+        }
+
+        .form-animation-leave {
+            opacity: 1;
+            animation: fade-out 0.3s ease-in-out forwards;
+        }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fade-out {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        footer {
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 3px solid #f1c40f; /* Выбранный цвет */
+            position: relative;
+            overflow: hidden;
+        }
+
+        header{
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 3px solid #f1c40f; /* Выбранный цвет */
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before, footer::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background-image: linear-gradient(to top, transparent 20%, #f1c40f 20%, #f1c40f 22%, transparent 22%, transparent 30%, #f1c40f 30%, #f1c40f 40%, transparent 40%),
+            linear-gradient(to bottom, transparent 20%, #f1c40f 20%, #f1c40f 22%, transparent 22%, transparent 30%, #f1c40f 30%, #f1c40f 40%, transparent 40%);
+            animation: glitch 1s infinite; /* Уменьшенная продолжительность анимации */
+            opacity: 0.7; /* Прозрачность */
+        }
+
+        @keyframes glitch {
+            0% {
+                transform: translate(0);
+            }
+            2% {
+                transform: translate(8px, -8px); /* Смещение */
+            }
+            4% {
+                transform: translate(-8px, 8px); /* Смещение */
+            }
+            6% {
+                transform: translate(-8px, 8px); /* Смещение */
+            }
+            8% {
+                transform: translate(8px, -8px); /* Смещение */
+            }
+            10% {
+                transform: translate(0);
+            }
+        }
+
+        /* Стили для кнопок */
+        button {
+            padding: 12px 24px; /* Увеличим размер кнопок */
+            font-size: 20px; /* Увеличим размер текста кнопок */
+            background-color: #f1c40f; /* Выбранный цвет */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #d4ac0d; /* Темнее при наведении */
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1 onclick="open('/catalog')">VHSTORE</h1>
+    <p>Your Ultimate VHS Store</p>
+</header>
+
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+<footer>
+    <p>&copy; 2023 VHStore. All rights reserved.</p>
+    <p>Any question? Contact us at support@vhstore.com</p>
+</footer>
+</body>
+</html>
